@@ -23,6 +23,11 @@ $wish_url = Import-Csv cache_data.csv | select  "Last Accessed", "URL" | ? URL -
 cd ..
 Remove-Item -Recurse -Force chromecacheview
 
-Write-Host $wish_url
-Set-Clipboard -Value $wish_url
-Write-Host "Link copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+if ($wish_url) {
+    Write-Host $wish_url
+    Set-Clipboard -Value $wish_url
+    Write-Host "Link copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+} else {
+    Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
+    pause
+}
