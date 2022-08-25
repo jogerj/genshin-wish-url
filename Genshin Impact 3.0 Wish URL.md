@@ -15,6 +15,9 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 ## Changelog
 <details>
 
+## Version 0.6
+* Added back old method as fallback option (when webCache gets destroyed/new install)
+
 ### Version 0.5
 * Changed game path lookup to search in log file instead of install path
 * Added China version (needs testing)
@@ -27,7 +30,7 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 ### Version 0.3
 * Added handling of different game path
 * Fixes issue with older installs of Genshin with different path
-* Added failsafe option for manual entry of game path. Drag and drop your shortcut or exe file (either launcher or game works), the cache path will be grabbed correctly
+* Added fallback option for manual entry of game path. Drag and drop your shortcut or exe file (either launcher or game works), the cache path will be grabbed correctly
   
 ### Version 0.2
 * Added date of URL to output
