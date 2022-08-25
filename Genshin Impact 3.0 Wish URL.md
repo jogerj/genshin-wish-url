@@ -2,7 +2,7 @@
 Win+R and paste following
 * Global/China
 ```powershell
-powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/fa425faad3cc0b874af5f34040459555169249b5/get_wish_url_from_cache.ps1')
+powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/92a398edefd0cce4915b9078d52c418b4560d47d/get_wish_url_from_cache.ps1')
 ```
 
 ## Report bugs/errors
@@ -14,7 +14,7 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 ## Version 0.7
 * Combined Global and China server scripts. Now will check for Global first before China log files. Can be overriden to force check China server by adding `china` to the parameter like this:
    ```powershell
-   powershell iex "&{$(irm 'https://gist.github.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/4d2d2cdba475393b2fda623d7824c5ae805357cc/get_wish_url_from_cache.ps1')} china"
+   powershell iex "&{$(irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/92a398edefd0cce4915b9078d52c418b4560d47d/get_wish_url_from_cache.ps1')} china"
    ```
 * Pass on args to elevated powershell correctly
 * Use more accurate file path pattern from [here](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/)
