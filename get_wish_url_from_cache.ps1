@@ -2,7 +2,7 @@
 # author: jogerj
 
 Try {
-    $genshinPath = Get-ItemPropertyValue -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Genshin Impact   aaaaaa" -Name InstallPath -ErrorAction Stop
+    $genshinPath = Get-ItemPropertyValue -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Genshin Impact" -Name InstallPath -ErrorAction Stop
 } Catch [System.Management.Automation.ItemNotFoundException]{
     Try {
     # possibly older install
