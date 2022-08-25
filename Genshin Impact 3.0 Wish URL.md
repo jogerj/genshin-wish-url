@@ -2,11 +2,11 @@
 Win+R and paste following
 * Global
 ```powershell
-powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/6ddd4d2d7f7feff3d25e767a6272ff48ba1e9cd2/get_wish_url_from_cache.ps1'))
+powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/9590dccf4997158386a3500c98fd6cbefb36a36a/get_wish_url_from_cache.ps1'))
 ```
 * China (needs testing)
 ```powershell
-powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/973f5ab10e3a35663941e779346a0e409a01d36e/get_wish_url_from_cache_cn.ps1'))
+powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/9590dccf4997158386a3500c98fd6cbefb36a36a/get_wish_url_from_cache_cn.ps1'))
 ```
 
 ## Report bugs/errors
