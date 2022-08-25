@@ -2,7 +2,6 @@
 # author: jogerj
 
 $logLocation = "%userprofile%\AppData\LocalLow\miHoYo\$([char]0x539f)$([char]0x795e)\output_log.txt"
-
 $logPath = [System.Environment]::ExpandEnvironmentVariables($logLocation);
 if (-Not [System.IO.File]::Exists($logPath)) {
     Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
@@ -23,6 +22,7 @@ Try {
     $logs = Get-Content -Path $logPath -ErrorAction Stop
 } Catch [System.Management.Automation.ItemNotFoundException] {
     Write-Host "Cannot find Genshin Impact log file! Make sure to run Genshin Impact and open the wish history at least once!" -ForegroundColor Red
+    pause
     return
 }
 
@@ -31,6 +31,7 @@ $logMatch = $logs -match $regexPattern
 
 if (-Not $logMatch) {
     Write-Host "Cannot find Genshin Impact path in log file! Make sure to run Genshin Impact and open the wish history at least once!" -ForegroundColor Red
+    pause
     return
 }
 
@@ -39,9 +40,14 @@ $gameDataPath = Resolve-Path $Matches[0]
 
 # Credits to PrimeCicada for finding this path
 $cachePath = "$gameDataPath\\webCaches\\Service Worker\\CacheStorage\\f944a42103e2b9f8d6ee266c44da97452cde8a7c"
+if (!(Test-Path $cachePath)) {
+    Write-Host "Cannot find Genshin Impact web cache! Make sure to run Genshin Impact and open the wish history at least once!" -ForegroundColor Red
+    pause
+    return
+}
 $cacheFolder = Get-ChildItem $cachePath | sort -Property LastWriteTime -Descending | select -First 1
 $content = Get-Content "$($cacheFolder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https.*#/log"
-$logEntry = $content[1].ToString()
+$logEntry = $content[0].ToString()
 $wishUrl = $logEntry -match "https.*#/log"
 
 if ($wishUrl) {
