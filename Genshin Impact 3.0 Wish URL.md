@@ -11,7 +11,7 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
   ```powershell
   $genshin_path = "C:\Program Files\Genshin Impact\"
   ```
-  or wherever you installed your game.
+  or wherever you installed your game. Run with `powershell get_wish_url_from_cache.ps1`
 
 ## Changelog
 <details>
