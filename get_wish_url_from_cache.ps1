@@ -5,7 +5,7 @@ function New-TemporaryDirectory {
 }
 
 $genshin_path = Get-ItemPropertyValue -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Genshin Impact" -Name InstallPath
-$cache_path = "$genshin_path\Genshin Impact Game\GenshinImpact_Data\webCaches\Cache\Cache_Data"
+$cache_path = "$genshin_path\\Genshin Impact Game\\GenshinImpact_Data\\webCaches\\Cache\\Cache_Data"
 $temp_dir = New-TemporaryDirectory
 cd $temp_dir
 
