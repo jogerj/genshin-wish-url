@@ -1,5 +1,6 @@
 ## Usage
 Win+R and paste following
+* Global
 ```powershell
 powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/6ddd4d2d7f7feff3d25e767a6272ff48ba1e9cd2/get_wish_url_from_cache.ps1'))
 ```
@@ -9,7 +10,11 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 
 ## Changelog
 <details>
-  
+
+### Version 0.5
+* Changed game path lookup to search in log file instead of install path
+* Added China version
+
 ### Version 0.4
 * ChromeCacheView no longer needed. Script will now read cache files directly
 * Credits to @PrimeCicada for finding an alternate path

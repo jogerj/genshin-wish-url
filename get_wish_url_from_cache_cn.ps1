@@ -1,7 +1,8 @@
 # script version 0.5
 # author: jogerj
 
-$logLocation = "%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt"
+$logLocation = "%userprofile%\AppData\LocalLow\miHoYo\$([char]0x539f)$([char]0x795e)\output_log.txt"
+
 $logPath = [System.Environment]::ExpandEnvironmentVariables($logLocation);
 if (-Not [System.IO.File]::Exists($logPath)) {
     Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
