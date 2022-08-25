@@ -40,9 +40,9 @@ $gameDataPath = Resolve-Path $Matches[0]
 # Credits to PrimeCicada for finding this path
 $cachePath = "$gameDataPath\\webCaches\\Service Worker\\CacheStorage\\f944a42103e2b9f8d6ee266c44da97452cde8a7c"
 $cacheFolder = Get-ChildItem $cachePath | sort -Property LastWriteTime -Descending | select -First 1
-$content = Get-Content "$($cacheFolder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v2/"
+$content = Get-Content "$($cacheFolder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https.*#/log"
 $logEntry = $content[1].ToString()
-$wishUrl = $logEntry -match "https.*log"
+$wishUrl = $logEntry -match "https.*#/log"
 
 if ($wishUrl) {
     $wishUrl = $Matches[0]

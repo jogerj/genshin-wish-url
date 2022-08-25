@@ -17,7 +17,8 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 
 ### Version 0.5
 * Changed game path lookup to search in log file instead of install path
-* Added China version
+* Added China version (needs testing)
+* adjusted URL lookup pattern
 
 ### Version 0.4
 * ChromeCacheView no longer needed. Script will now read cache files directly
