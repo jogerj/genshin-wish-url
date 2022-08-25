@@ -12,7 +12,6 @@ Try {
         $genshinExe = Read-Host -Prompt "Drag and drop your Genshin Impact game/launcher shortcut/exe file here and press ENTER"
         $genshinExe = $genshinExe.Replace('"', '')
         if ($genshinExe.EndsWith(".lnk")) {
-            echo $lnk
             # extract path from shortcut
             $wshell = New-Object -ComObject WScript.Shell
             $genshinExe = Get-ChildItem -Path $genshinExe | ForEach-Object {$wshell.CreateShortcut($_.Fullname).TargetPath}
