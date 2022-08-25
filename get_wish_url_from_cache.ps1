@@ -62,8 +62,8 @@ $wishUrl = $wishLog | % {$_.URL.Substring(4)}
 $wishUrlDate = $wishLog | % {$_."Last Accessed" -as [datetime]}
 
 # clean up 
-#cd ..
-#Remove-Item -Recurse -Force chromecacheview
+cd ..
+Remove-Item -Recurse -Force chromecacheview
 
 if ($wishUrl) {
     $current = Get-Date
