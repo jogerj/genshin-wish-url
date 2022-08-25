@@ -1,12 +1,8 @@
 ## Usage
 Win+R and paste following
-* Global
+* Global/China
 ```powershell
-powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/9590dccf4997158386a3500c98fd6cbefb36a36a/get_wish_url_from_cache.ps1'))
-```
-* China (needs testing)
-```powershell
-powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/9590dccf4997158386a3500c98fd6cbefb36a36a/get_wish_url_from_cache_cn.ps1'))
+powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/9590dccf4997158386a3500c98fd6cbefb36a36a/get_wish_url_from_cache.ps1')
 ```
 
 ## Report bugs/errors
@@ -14,7 +10,11 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 
 ## Changelog
 <details>
-
+  
+## Version 0.7
+* Combined Global and China server scripts. Now will check for Global first before China log files. Can be overriden to force check China server by adding `china` to the parameter, e.g. `./get_wish_url_from_cache.ps1 china`
+* Pass on args to elevated powershell correctly
+  
 ## Version 0.6
 * Added back old method as fallback option (when webCache gets destroyed/new install)
 

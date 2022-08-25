@@ -1,32 +1,28 @@
-# script version 0.6
+# script version 0.7
 # author: jogerj
 
-$logLocation = "%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt"
-$logPath = [System.Environment]::ExpandEnvironmentVariables($logLocation);
-if (-Not [System.IO.File]::Exists($logPath)) {
-    Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
-    if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {  
-        Write-Host "Do you want to try to run the script as Administrator? Press [ENTER] to continue, or any key to cancel."
-        $keyInput = [Console]::ReadKey($true).Key
-        if ($keyInput -ne "13") {
-            return
-        }
-        $arguments = "& '" +$myinvocation.mycommand.definition + "'"
-        Start-Process powershell -Verb runAs -ArgumentList "-noexit", $arguments
-        break
+$reg = $args[0]
+$logPath = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt");
+if (!(Test-Path $logPath) -or $reg -eq "china") {
+    $logPath = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\$([char]0x539f)$([char]0x795e)\output_log.txt");
+    if (!(Test-Path $logPath)) {
+        Write-Host "Cannot find Genshin Impact log file! Make sure to run Genshin Impact and open the wish history at least once!" -ForegroundColor Red
+        if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {  
+            Write-Host "Do you want to try to run the script as Administrator? Press [ENTER] to continue, or any key to cancel."
+            $keyInput = [Console]::ReadKey($true).Key
+            if ($keyInput -ne "13") {
+                return
+            }
+            $arguments = "& '" +$myinvocation.mycommand.definition + "'"
+            Start-Process powershell -Verb runAs -ArgumentList "-noexit $arguments $reg"
+            break
+        } 
+        return
     }
-    return
 }
 
-Try {
-    $logs = Get-Content -Path $logPath -ErrorAction Stop
-} Catch [System.Management.Automation.ItemNotFoundException] {
-    Write-Host "Cannot find Genshin Impact log file! Make sure to run Genshin Impact and open the wish history at least once!" -ForegroundColor Red
-    pause
-    return
-}
-
-$regexPattern = "(?<=^Warmup file )(.*GenshinImpact_Data)(?=.*$)"
+$logs = Get-Content -Path $logPath
+$regexPattern = "(?<=^Warmup file )(.*(GenshinImpact|YuanShen)_Data)(?=.*$)"
 $logMatch = $logs -match $regexPattern
 
 if (-Not $logMatch) {
