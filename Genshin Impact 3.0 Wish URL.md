@@ -14,8 +14,9 @@ Initial release
 </details>
 
 <details>
-<summary>Original concept</summary>
+<summary>Original</summary>
 
+## Method
 I found a less intrusive way to retrieve wish URL, involves reading from cache:
 1. Download and open [Chrome Cache View](https://www.nirsoft.net/utils/chromecacheview.zip)
 2. Open your genshin folder and locate this folder: e.g.
@@ -27,4 +28,7 @@ I found a less intrusive way to retrieve wish URL, involves reading from cache:
 6. Remove the `1/0/` in front of the URL
 7. Post to paimon.moe as usual
 
+## Why this works
+  Genshin Impact uses [ZFBrowser](https://zenfulcrum.com/browser/docs/Readme.html), which essentially embeds a Chromium web browser into the game. Hence, there's no reason to not believe that it would behave like a normal Google Chrome/Chromium/Edge browser. The structure of the cache folder doesn't let you easily read its contents but luckily [NirSoft](https://www.nirsoft.net/utils/chrome_cache_view.html) here has done the reverse-engineering for us so all we need to do is retrieve the URL of the cache for that JSON file the game retrieved.
+  
 </details>
