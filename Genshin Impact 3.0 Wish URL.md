@@ -12,7 +12,10 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 <details>
   
 ## Version 0.7
-* Combined Global and China server scripts. Now will check for Global first before China log files. Can be overriden to force check China server by adding `china` to the parameter, e.g. `./get_wish_url_from_cache.ps1 china`
+* Combined Global and China server scripts. Now will check for Global first before China log files. Can be overriden to force check China server by adding `china` to the parameter like this:
+   ```powershell
+   iex "&{$(irm 'https://gist.github.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/4d2d2cdba475393b2fda623d7824c5ae805357cc/get_wish_url_from_cache.ps1')} china"
+   ```
 * Pass on args to elevated powershell correctly
   
 ## Version 0.6
