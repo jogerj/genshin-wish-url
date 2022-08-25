@@ -4,7 +4,17 @@ Win+R and paste following
 powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/6ddd4d2d7f7feff3d25e767a6272ff48ba1e9cd2/get_wish_url_from_cache.ps1'))
 ```
 
-<details><summary>Changelog</summary>
+## Report bugs/errors
+Comment on this gist or send message on [paimon.moe Discord server](https://discord.com/channels/820601523125747712/820601523125747715/1012175730873991228)
+* #### Error `Get-ItemPropertyValue : Property InstallPath does not exist at Path 
+  Either you did not install Genshin Impact on your computer or you did a fresh install in Windows 11 (fix incoming). Current workaround is to manually specify the installation path. Save this [script](#file-get_wish_url_from_cache-ps1) below to your computer and modify this line
+  ```powershell
+  $genshin_path = "C:\Program Files\Genshin Impact\"
+  ```
+  or wherever you installed your game.
+
+## Changelog
+<details>
 
 ### Version 0.2
 * Added date of URL to output
@@ -14,7 +24,7 @@ Initial release
 </details>
 
 <details>
-<summary>Original</summary>
+  <summary><h2>Original Post</h2></summary>
 
 ## Method
 I found a less intrusive way to retrieve wish URL, involves reading from cache:
