@@ -26,7 +26,7 @@ Try {
     return
 }
 
-$regexPattern = "(?<=^Warmup file )(.*GenshinImpact_Data)(?=.*$)"
+$regexPattern = "(?<=^Warmup file )(.*YuanShen_Data)(?=.*$)"
 $logMatch = $logs -match $regexPattern
 
 if (-Not $logMatch) {
