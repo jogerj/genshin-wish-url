@@ -5,6 +5,7 @@ powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.g
 ```
 
 <details><summary>Changelog</summary>
+
 ### Version 0.2
 * Added date of URL to output
 * Add warning for URL older than 24h
