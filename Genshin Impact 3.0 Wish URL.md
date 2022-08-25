@@ -6,7 +6,7 @@ powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.g
 
 ## Report bugs/errors
 Comment on this gist or send message on [paimon.moe Discord server](https://discord.com/channels/820601523125747712/820601523125747715/1012175730873991228)
-* #### Error `Get-ItemPropertyValue : Property InstallPath does not exist at Path 
+* #### Error `Get-ItemPropertyValue : Property InstallPath does not exist at Path`
   Either you did not install Genshin Impact on your computer or you did a fresh install in Windows 11 (fix incoming). Current workaround is to manually specify the installation path. Save this [script](https://gist.github.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/cc6187e8f09618ea29e7fa05e7d019ed97729b9d/get_wish_url_from_cache.ps1) below to your computer and modify this line
   ```powershell
   $genshin_path = "C:\Program Files\Genshin Impact\"
