@@ -45,7 +45,7 @@ $cachePath = "$gamePath\\GenshinImpact_Data\\webCaches\\Service Worker\\CacheSto
 cd $cachePath
 
 $cacheFolder = Get-ChildItem | sort -Property LastWriteTime -Descending | select -First 1
-$content = Get-Content "$($cache_folder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v2/"
+$content = Get-Content "$($cacheFolder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v2/"
 $logEntry = $content[1].ToString()
 $wishUrl = $logEntry -match "https.*log"
 
