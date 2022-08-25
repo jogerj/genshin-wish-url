@@ -1,4 +1,4 @@
-# script version 0.3
+# script version 0.4
 # author: jogerj
 
 Try {
@@ -12,6 +12,7 @@ Try {
         $genshinExe = Read-Host -Prompt "Drag and drop your Genshin Impact game/launcher shortcut/exe file here and press ENTER"
         $genshinExe = $genshinExe.Replace('"', '')
         if ($genshinExe.EndsWith(".lnk")) {
+            echo $lnk
             # extract path from shortcut
             $wshell = New-Object -ComObject WScript.Shell
             $genshinExe = Get-ChildItem -Path $genshinExe | ForEach-Object {$wshell.CreateShortcut($_.Fullname).TargetPath}
@@ -39,44 +40,32 @@ if (!($gamePath)) {
     
 }
 
-function New-TemporaryDirectory {
-    $parent = [System.IO.Path]::GetTempPath()
-    [string] $name = [System.Guid]::NewGuid()
-    New-Item -ItemType Directory -Path (Join-Path $parent $name)
-}
+# Credits to PrimeCicada for finding this path
+$cachePath = "$gamePath\\GenshinImpact_Data\\webCaches\\Service Worker\\CacheStorage\\f944a42103e2b9f8d6ee266c44da97452cde8a7c"
+cd $cachePath
 
-$cachePath = "$gamePath\\GenshinImpact_Data\\webCaches\\Cache\\Cache_Data"
-$tempDir = New-TemporaryDirectory
-cd $tempDir
-
-# downloads ChromeCacheView
-Invoke-WebRequest -Uri "https://www.nirsoft.net/utils/chromecacheview.zip" -OutFile chromecacheview.zip
-Expand-Archive chromecacheview.zip -DestinationPath chromecacheview
-cd chromecacheview
-
-.\ChromeCacheView.exe -folder $cachePath /scomma cache_data.csv
-# processing cache takes a while
-while (!(Test-Path cache_data.csv)) { Start-Sleep 1 }
-$wishLog = Import-Csv cache_data.csv | select  "Last Accessed", "URL" | ? URL -like "*event/gacha_info/api/getGachaLog*" | Sort-Object -Descending { $_."Last Accessed" -as [datetime] } | select -first 1
-$wishUrl = $wishLog | % {$_.URL.Substring(4)}
-$wishUrlDate = $wishLog | % {$_."Last Accessed" -as [datetime]}
-
-# clean up 
-cd ..
-Remove-Item -Recurse -Force chromecacheview
+$cacheFolder = Get-ChildItem | sort -Property LastWriteTime -Descending | select -First 1
+$content = Get-Content "$($cache_folder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v2/"
+$logEntry = $content[1].ToString()
+$wishUrl = $logEntry -match "https.*log"
 
 if ($wishUrl) {
-    $current = Get-Date
-    $timeDiff = New-TimeSpan -Start $wishUrlDate -End $current | % {$_.Hours}
-
+    $wishUrl = $Matches[0]
     Write-Host $wishUrl
-    if ($timeDiff -ge 24) {
+    
+    $wishUrlDate = $logEntry -match "\w{3}, \d{2} \w{3} \d{4} \d\d:\d\d:\d\d GMT"
+    if ($wishUrlDate) {
+        $wishUrlDate = $Matches[0] -as [datetime]
+        $current = Get-Date
+        $timeDiff = New-TimeSpan -Start $wishUrlDate -End $current | % {$_.Hours}
+        if ($timeDiff -ge 24) {
         Write-Host "WARNING: Link found is older than 24 hours and might be expired! Open Wish History again to fetch a new link if it doesn't work" -ForegroundColor Yellow
-        Read-Host -Prompt "Press ENTER to copy link anyway or CTRL+C to quit" 
+        Read-Host -Prompt "Press ENTER to copy link anyway or CTRL-C to quit" 
+        }
     }
     Set-Clipboard -Value $wishUrl
     Write-Host "Link from $wishUrlDate copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
 } else {
-    Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
+    Write-Host "Link not found! Make sure to open Wish History page at least once before running." -ForegroundColor Red
     pause
 }

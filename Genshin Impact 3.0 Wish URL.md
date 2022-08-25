@@ -10,6 +10,10 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 ## Changelog
 <details>
   
+### Version 0.4
+* ChromeCacheView no longer needed. Script will now read cache files directly
+* Credits to @PrimeCicada for finding an alternate path
+  
 ### Version 0.3
 * Added handling of different game path
 * Fixes issue with older installs of Genshin with different path
