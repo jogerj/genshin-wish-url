@@ -4,6 +4,14 @@ Win+R and paste following
 powershell iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/6ddd4d2d7f7feff3d25e767a6272ff48ba1e9cd2/get_wish_url_from_cache.ps1'))
 ```
 
+<details><summary>Changelog</summary>
+### Version 0.2
+* Added date of URL to output
+* Add warning for URL older than 24h
+### Version 0.1
+Initial release
+</details>
+
 <details>
 <summary>Original concept</summary>
 
