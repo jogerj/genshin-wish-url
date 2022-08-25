@@ -22,7 +22,7 @@ if (!(Test-Path $logPath) -or $reg -eq "china") {
 }
 
 $logs = Get-Content -Path $logPath
-$regexPattern = "(?<=^Warmup file )(.*(GenshinImpact|YuanShen)_Data)(?=.*$)"
+$regexPattern = "(?m).:/.+(GenshinImpact_Data|YuanShen_Data)"
 $logMatch = $logs -match $regexPattern
 
 if (-Not $logMatch) {

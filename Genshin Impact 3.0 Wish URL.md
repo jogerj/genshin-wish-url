@@ -17,6 +17,7 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
    powershell iex "&{$(irm 'https://gist.github.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/4d2d2cdba475393b2fda623d7824c5ae805357cc/get_wish_url_from_cache.ps1')} china"
    ```
 * Pass on args to elevated powershell correctly
+* Use more accurate file path pattern from [here](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/)
   
 ## Version 0.6
 * Added back old method as fallback option (when webCache gets destroyed/new install)
