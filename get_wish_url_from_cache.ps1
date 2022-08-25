@@ -1,3 +1,5 @@
+# script version 0.1
+# author: jogerj
 function New-TemporaryDirectory {
     $parent = [System.IO.Path]::GetTempPath()
     [string] $name = [System.Guid]::NewGuid()
