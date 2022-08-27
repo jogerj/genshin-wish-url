@@ -2,8 +2,7 @@
 # author: jogerj
 
 
-function processWishUrl {
-    param($wishUrl)
+function processWishUrl($wishUrl) {
     # check validity
     $urlResponseMessage = Invoke-RestMethod -URI $wishUrl | % {$_.message}
     if ($urlResponseMessage -ne "OK") {
@@ -11,11 +10,10 @@ function processWishUrl {
         return
     }
     # OK
-    $wishTime = $wishURL -match "timestamp=\d+"
-    $wishTime = (Get-Date 01.01.1970).AddSeconds(($Matches[0] -split "=")[1])
     Write-Host $wishURL
     Set-Clipboard -Value $wishURL
-    Write-Host "Link from $wishTime copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+    Write-Host "Link copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+    }
     return
 }
 
