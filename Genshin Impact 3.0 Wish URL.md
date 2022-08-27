@@ -2,7 +2,7 @@
 Win+R and paste following
 * Global/China
 ```powershell
-powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/fe7b61658717381cc351774699cb90ac01b20bec/get_wish_url_from_cache.ps1')
+powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/dbfc65a15db519e9fb1bfe2041f537261018b05e/get_wish_url_from_cache.ps1')
 ```
 
 ## Report bugs/errors
