@@ -4,7 +4,6 @@ Win+R and paste following
 ```powershell
 powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/dbfc65a15db519e9fb1bfe2041f537261018b05e/get_wish_url_from_cache.ps1')
 ```
-
 ## Report bugs/errors
 Comment on this gist or send message on [paimon.moe Discord server](https://discord.com/channels/820601523125747712/820601523125747715/1012175730873991228)
 
@@ -49,8 +48,10 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 * Initial release
 </details>
 
+## [Original script](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235)
+
+## Original Post
 <details>
-  <summary><h2>Original Post</h2></summary>
 
 ## Method
 I found a less intrusive way to retrieve wish URL, involves reading from cache:
@@ -68,3 +69,4 @@ I found a less intrusive way to retrieve wish URL, involves reading from cache:
   Genshin Impact uses [ZFBrowser](https://zenfulcrum.com/browser/docs/Readme.html), which essentially embeds a Chromium web browser into the game. Hence, there's no reason to not believe that it would behave like a normal Google Chrome/Chromium/Edge browser. The structure of the cache folder doesn't let you easily read its contents but luckily [NirSoft](https://www.nirsoft.net/utils/chrome_cache_view.html) here has done the reverse-engineering for us so all we need to do is retrieve the URL of the cache for that JSON file the game retrieved.
   
 </details>
+
