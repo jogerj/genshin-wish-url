@@ -4,7 +4,16 @@
 
 function processWishUrl($wishUrl) {
     # check validity
-    $urlResponseMessage = Invoke-RestMethod -URI $wishUrl | % {$_.message}
+    if ($wishUrl -match "https:\/\/webstatic") {
+        if ($wishUrl -match "hk4e_global") {
+            $checkUrl = $wishUrl -replace "https:\/\/webstatic.+html\?", "https://hk4e-api-os.mihoyo.com/event/gacha_info/api/getGachaLog?"
+        } else {
+            $checkUrl = $wishUrl -replace "https:\/\/webstatic.+html\?", "https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog?"
+        }
+        $urlResponseMessage = Invoke-RestMethod -URI $checkUrl | % {$_.message}
+    } else {
+        $urlResponseMessage = Invoke-RestMethod -URI $wishUrl | % {$_.message}
+    }
     if ($urlResponseMessage -ne "OK") {
         Write-Host "Link found is expired/invalid! Open Wish History again to fetch a new link" -ForegroundColor Yellow
         return $False
