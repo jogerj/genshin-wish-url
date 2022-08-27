@@ -1,5 +1,23 @@
-# script version 0.7
+# script version 0.8
 # author: jogerj
+
+
+function processWishUrl {
+    param($wishUrl)
+    # check validity
+    $urlResponseMessage = Invoke-RestMethod -URI $wishUrl | % {$_.message}
+    if ($urlResponseMessage -ne "OK") {
+        Write-Host "Link found is expired/invalid! Open Wish History again to fetch a new link" -ForegroundColor Yellow
+        return
+    }
+    # OK
+    $wishTime = $wishURL -match "timestamp=\d+"
+    $wishTime = (Get-Date 01.01.1970).AddSeconds(($Matches[0] -split "=")[1])
+    Write-Host $wishURL
+    Set-Clipboard -Value $wishURL
+    Write-Host "Link from $wishTime copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+    return
+}
 
 $reg = $args[0]
 $logPath = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt");
@@ -34,37 +52,42 @@ if (-Not $logMatch) {
 $gameDataPath = ($logMatch | Select -Last 1) -match $regexPattern
 $gameDataPath = Resolve-Path $Matches[0]
 
-# Credits to PrimeCicada for finding this path
+# Method 1
+$cachePath = "$gameDataPath\\webCaches\\Cache\\Cache_Data\\data_2"
+if (Test-Path $cachePath) {
+    $tmpFile = "$env:TEMP/ch_data_2"
+    Copy-Item $cachePath -Destination $tmpFile
+    $content = Get-Content -Encoding UTF8 -Raw $tmpfile
+    $splitted = $content -split "1/0/" | Select -Last 1
+    $found = $splitted -match "https.+?game_biz=hk4e_global"
+    Remove-Item $tmpFile
+    if ($found) {
+        $wishUrl = $Matches[0]
+        processWishUrl $wishUrl
+        return
+    }  
+}
+
+# Method 2 (Credits to PrimeCicada for finding this path)
 $cachePath = "$gameDataPath\\webCaches\\Service Worker\\CacheStorage\\f944a42103e2b9f8d6ee266c44da97452cde8a7c"
 if (Test-Path $cachePath) {
+    Write-Host "Using Fallback Method (SW)" -ForegroundColor Yellow
     $cacheFolder = Get-ChildItem $cachePath | sort -Property LastWriteTime -Descending | select -First 1
     $content = Get-Content "$($cacheFolder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https.*#/log"
     $logEntry = $content[0].ToString()
     $wishUrl = $logEntry -match "https.*#/log"
-    
     if ($wishUrl) {
         $wishUrl = $Matches[0]
-        Write-Host $wishUrl
-    
-        $wishUrlDate = $logEntry -match "\w{3}, \d{2} \w{3} \d{4} \d\d:\d\d:\d\d GMT"
-        if ($wishUrlDate) {
-            $wishUrlDate = $Matches[0] -as [datetime]
-            $current = Get-Date
-            $timeDiff = New-TimeSpan -Start $wishUrlDate -End $current | % {$_.Hours}
-            if ($timeDiff -ge 24) {
-            Write-Host "WARNING: Link found is older than 24 hours and might be expired! Open Wish History again to fetch a new link if it doesn't work" -ForegroundColor Yellow
-            Read-Host -Prompt "Press ENTER to copy link anyway or CTRL-C to quit" 
-            }
-        }
-        Set-Clipboard -Value $wishUrl
-        Write-Host "Link from $wishUrlDate copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+        processWishUrl $wishUrl
         return
     }
-} 
-Write-Host "Using Fallback method" -ForegroundColor Yellow
-# fallback old method
-$tempPath = mkdir "$env:TEMP\\paimonmoe" -Force
+    Write-Host "Fallback Method (SW) failed to find wish history URL!" -ForegroundColor Red
+}
+
+# Method 3
+Write-Host "Using Fallback method (CCV)" -ForegroundColor Yellow
 $cachePath = "$gameDataPath\\webCaches\\Cache\\Cache_Data"
+$tempPath = mkdir "$env:TEMP\\paimonmoe" -Force
 # downloads ChromeCacheView
 Invoke-WebRequest -Uri "https://www.nirsoft.net/utils/chromecacheview.zip" -OutFile "$tempPath\\chromecacheview.zip"
 Expand-Archive "$tempPath\\chromecacheview.zip" -DestinationPath "$tempPath\\chromecacheviewer" -Force
@@ -73,20 +96,10 @@ Expand-Archive "$tempPath\\chromecacheview.zip" -DestinationPath "$tempPath\\chr
 while (!(Test-Path "$tempPath\\cache_data.csv")) { Start-Sleep 1 }
 $wishLog = Import-Csv "$tempPath\\cache_data.csv" | select  "Last Accessed", "URL" | ? URL -like "*event/gacha_info/api/getGachaLog*" | Sort-Object -Descending { $_."Last Accessed" -as [datetime] } | select -first 1
 $wishUrl = $wishLog | % {$_.URL.Substring(4)}
-$wishUrlDate = $wishLog | % {$_."Last Accessed" -as [datetime]}
 # clean up 
 Remove-Item -Recurse -Force $tempPath
 if ($wishUrl) {
-    $current = Get-Date
-    $timeDiff = New-TimeSpan -Start $wishUrlDate -End $current | % {$_.Hours}
-
-    Write-Host $wishUrl
-    if ($timeDiff -ge 24) {
-        Write-Host "WARNING: Link found is older than 24 hours and might be expired! Open Wish History again to fetch a new link if it doesn't work" -ForegroundColor Yellow
-        Read-Host -Prompt "Press ENTER to copy link anyway or CTRL+C to quit" 
-    }
-    Set-Clipboard -Value $wishUrl
-    Write-Host "Link from $wishUrlDate copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
+    processWishUrl $wishUrl
 } else {
     Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
     pause

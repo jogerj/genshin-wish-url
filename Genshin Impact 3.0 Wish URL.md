@@ -10,7 +10,13 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 
 ## Changelog
 <details>
-  
+
+## Version 0.8
+* Added new method from [MadeBaruna](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/). Now supports 3 different methods (should be totally foolproof 🤞)
+* Automatically checks for expired/invalid link
+* URL date is now retrieved from URL `timestamp` parameter
+
+
 ## Version 0.7
 * Combined Global and China server scripts. Now will check for Global first before China log files. Can be overriden to force check China server by adding `china` to the parameter like this:
    ```powershell
