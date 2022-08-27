@@ -13,7 +13,6 @@ function processWishUrl($wishUrl) {
     Write-Host $wishURL
     Set-Clipboard -Value $wishURL
     Write-Host "Link copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
-    }
     return
 }
 
