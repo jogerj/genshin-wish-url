@@ -7,13 +7,13 @@ function processWishUrl($wishUrl) {
     $urlResponseMessage = Invoke-RestMethod -URI $wishUrl | % {$_.message}
     if ($urlResponseMessage -ne "OK") {
         Write-Host "Link found is expired/invalid! Open Wish History again to fetch a new link" -ForegroundColor Yellow
-        return
+        return $False
     }
     # OK
     Write-Host $wishURL
     Set-Clipboard -Value $wishURL
     Write-Host "Link copied to clipboard, paste it back to paimon.moe" -ForegroundColor Green
-    return
+    return $True
 }
 
 $reg = $args[0]
@@ -60,9 +60,11 @@ if (Test-Path $cachePath) {
     Remove-Item $tmpFile
     if ($found) {
         $wishUrl = $Matches[0]
-        processWishUrl $wishUrl
-        return
-    }  
+        if (processWishUrl $wishUrl) {
+            return
+        }
+    }
+    Write-Host "Retrying using fallback method..." -ForegroundColor Red
 }
 
 # Method 2 (Credits to PrimeCicada for finding this path)
@@ -75,10 +77,12 @@ if (Test-Path $cachePath) {
     $wishUrl = $logEntry -match "https.*#/log"
     if ($wishUrl) {
         $wishUrl = $Matches[0]
-        processWishUrl $wishUrl
-        return
+        if (processWishUrl $wishUrl) {
+            return
+        }
+        
     }
-    Write-Host "Fallback Method (SW) failed to find wish history URL!" -ForegroundColor Red
+    Write-Host "Fallback Method (SW) failed to find wish history URL! Retrying using second fallback method..." -ForegroundColor Red
 }
 
 # Method 3
@@ -96,8 +100,10 @@ $wishUrl = $wishLog | % {$_.URL.Substring(4)}
 # clean up 
 Remove-Item -Recurse -Force $tempPath
 if ($wishUrl) {
-    processWishUrl $wishUrl
-} else {
-    Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
-    pause
+    if (processWishUrl $wishUrl) {
+        return
+    }
 }
+
+Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
+pause
