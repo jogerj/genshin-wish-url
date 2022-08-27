@@ -1,4 +1,4 @@
-# script version 0.8
+# script version 0.9
 # author: jogerj
 
 
@@ -56,7 +56,7 @@ if (Test-Path $cachePath) {
     Copy-Item $cachePath -Destination $tmpFile
     $content = Get-Content -Encoding UTF8 -Raw $tmpfile
     $splitted = $content -split "1/0/" | Select -Last 1
-    $found = $splitted -match "https.+?game_biz=hk4e_global"
+    $found = $splitted -match "https.+?game_biz=hk4e_(global|cn)"
     Remove-Item $tmpFile
     if ($found) {
         $wishUrl = $Matches[0]

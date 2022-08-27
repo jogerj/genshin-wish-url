@@ -10,6 +10,9 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 ## Changelog
 <details>
 
+## Version 0.9
+* Fix CN suffix to `game_biz=hk4e_cn`
+
 ## Version 0.8
 * Added new method from [MadeBaruna](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/). Now supports 3 different methods (should be totally foolproof 🤞)
 * Automatically checks for expired/invalid link
