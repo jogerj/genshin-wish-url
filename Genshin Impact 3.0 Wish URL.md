@@ -1,13 +1,15 @@
-## Usage
+# Usage
 Win+R and paste following
 * Global/China
 ```powershell
 powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/eeba0fb7e47303353065c321ff2afd75b195f715/get_wish_url_from_cache.ps1')
 ```
-## Report bugs/errors
+### [Click here for getting wish URL from Genshin Impact on Android](https://gist.github.com/jogerj/2372d0e5bee51e001a6d8956240d527b)
+
+# Report bugs/errors
 Comment on this gist or send message on [paimon.moe Discord server](https://discord.com/channels/820601523125747712/820601523125747715/1012175730873991228)
 
-## Changelog
+# Changelog
 <details>
 
 ## Version 0.9
