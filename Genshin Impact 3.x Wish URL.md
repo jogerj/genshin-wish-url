@@ -1,6 +1,6 @@
 # Usage
 Win+R and paste following
-* Global/China
+* All versions (Global/China)
 ```powershell
 powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/eeba0fb7e47303353065c321ff2afd75b195f715/get_wish_url_from_cache.ps1')
 ```
@@ -11,6 +11,9 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 
 # Changelog
 <details>
+
+## Version 0.10
+* Now if a user has both global and china version of the game, it will load the URL from whichever is last open.
 
 ## Version 0.9
 * Fix CN suffix to `game_biz=hk4e_cn`

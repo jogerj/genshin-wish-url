@@ -1,4 +1,4 @@
-# script version 0.9
+# script version 0.10
 # author: jogerj
 
 
@@ -25,11 +25,26 @@ function processWishUrl($wishUrl) {
     return $True
 }
 
-$reg = $args[0]
-$logPath = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt");
-if (!(Test-Path $logPath) -or $reg -eq "china") {
-    $logPath = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\$([char]0x539f)$([char]0x795e)\output_log.txt");
-    if (!(Test-Path $logPath)) {
+$logPathGlobal = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt");
+$logPathChina = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\$([char]0x539f)$([char]0x795e)\output_log.txt");
+$globalExists = Test-Path $logPathGlobal;
+$cnExists = Test-Path $logPathChina;
+
+if ($globalExists) {
+    if ($cnExists) {
+        # both exists, pick newest one
+        if ((Get-Item $logPathGlobal).LastWriteTime -ge (Get-Item $logPathChina).LastWriteTime) {
+            $logPath = $logPathGlobal;
+        } else {
+            $logPath = $logPathChina;
+        }
+    } else {
+        $logPath = $logPathGlobal;
+    } 
+} else {
+    if ($cnExists) {
+        $logPath = $logPathChina;
+    } else {
         Write-Host "Cannot find Genshin Impact log file! Make sure to run Genshin Impact and open the wish history at least once!" -ForegroundColor Red
         if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {  
             Write-Host "Do you want to try to run the script as Administrator? Press [ENTER] to continue, or any key to cancel."
@@ -44,6 +59,7 @@ if (!(Test-Path $logPath) -or $reg -eq "china") {
         return
     }
 }
+
 
 $logs = Get-Content -Path $logPath
 $regexPattern = "(?m).:/.+(GenshinImpact_Data|YuanShen_Data)"
