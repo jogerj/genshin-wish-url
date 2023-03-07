@@ -2,7 +2,7 @@
 Win+R and paste following
 * All versions (Global/China)
 ```powershell
-powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/d1b9f6adf15fbadab9a27940fb668abe8f198480/get_wish_url_from_cache.ps1')
+powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/get_wish_url_from_cache.ps1')
 ```
 ### [Click here for getting wish URL from Genshin Impact on Android](https://gist.github.com/jogerj/2372d0e5bee51e001a6d8956240d527b)
 
@@ -28,7 +28,7 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 ## Version 0.7
 * Combined Global and China server scripts. Now will check for Global first before China log files. Can be overriden to force check China server by adding `china` to the parameter like this:
    ```powershell
-   powershell iex "&{$(irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/92a398edefd0cce4915b9078d52c418b4560d47d/get_wish_url_from_cache.ps1')} china"
+   powershell iex "&{$(irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/get_wish_url_from_cache.ps1')} china"
    ```
 * Pass on args to elevated powershell correctly
 * Use more accurate file path pattern from [here](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/)
