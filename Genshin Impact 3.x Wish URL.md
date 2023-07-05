@@ -12,6 +12,9 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 # Changelog
 <details>
 
+## Version 0.11
+* Fix for Genshin 3.8
+
 ## Version 0.10
 * Now if a user has both global and china version of the game, it will load the URL from whichever is last open.
 
