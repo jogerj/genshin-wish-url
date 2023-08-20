@@ -12,6 +12,10 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 # Changelog
 <details>
 
+## Version 0.12.0
+* Deprecated and removed fallback methods
+* Now cache path lookup checks for latest modified subfolder
+   
 ## Version 0.11.1
 * Fix for Genshin 4.0
    

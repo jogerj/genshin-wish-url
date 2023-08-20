@@ -1,4 +1,4 @@
-# script version 0.11.1
+# script version 0.12.0
 # author: jogerj
 
 
@@ -74,8 +74,11 @@ if (-Not $logMatch) {
 $gameDataPath = ($logMatch | Select -Last 1) -match $regexPattern
 $gameDataPath = Resolve-Path $Matches[0]
 
-# Method 1
-$cachePath = "$gameDataPath\\webCaches\\2.15.0.0\\Cache\\Cache_Data\\data_2"
+
+$webcachePath = Resolve-Path "$gameDataPath\\webCaches"
+$cacheVerPath = Get-Item (Get-ChildItem -Path $webcachePath | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
+$cachePath = Resolve-Path "$cacheVerPath\\Cache\\Cache_Data\\data_2"
+
 if (Test-Path $cachePath) {
     $tmpFile = "$env:TEMP/ch_data_2"
     Copy-Item $cachePath -Destination $tmpFile
@@ -89,46 +92,9 @@ if (Test-Path $cachePath) {
             return
         }
     }
-    Write-Host "Retrying using fallback method..." -ForegroundColor Red
+    Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
+    pause
+} else {
+    Write-Host "Genshin Impact cache not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
+    pause
 }
-
-# Method 2 (Credits to PrimeCicada for finding this path)
-$cachePath = "$gameDataPath\\webCaches\\2.13.0.1\\Service Worker\\CacheStorage\\f944a42103e2b9f8d6ee266c44da97452cde8a7c"
-if (Test-Path $cachePath) {
-    Write-Host "Using Fallback Method (SW)" -ForegroundColor Yellow
-    $cacheFolder = Get-ChildItem $cachePath | sort -Property LastWriteTime -Descending | select -First 1
-    $content = Get-Content "$($cacheFolder.FullName)\\00d9a0f4d2a83ce0_0" | Select-String -Pattern "https.*#/log"
-    $logEntry = $content[0].ToString()
-    $wishUrl = $logEntry -match "https.*#/log"
-    if ($wishUrl) {
-        $wishUrl = $Matches[0]
-        if (processWishUrl $wishUrl) {
-            return
-        }
-        
-    }
-    Write-Host "Fallback Method (SW) failed to find wish history URL! Retrying using second fallback method..." -ForegroundColor Red
-}
-
-# Method 3
-Write-Host "Using Fallback method (CCV)" -ForegroundColor Yellow
-$cachePath = "$gameDataPath\\webCaches\\2.13.0.1\\Cache\\Cache_Data"
-$tempPath = mkdir "$env:TEMP\\paimonmoe" -Force
-# downloads ChromeCacheView
-Invoke-WebRequest -Uri "https://www.nirsoft.net/utils/chromecacheview.zip" -OutFile "$tempPath\\chromecacheview.zip"
-Expand-Archive "$tempPath\\chromecacheview.zip" -DestinationPath "$tempPath\\chromecacheviewer" -Force
-& "$tempPath\chromecacheviewer\\ChromeCacheView.exe" -folder $cachePath /scomma "$tempPath\\cache_data.csv"
-# processing cache takes a while
-while (!(Test-Path "$tempPath\\cache_data.csv")) { Start-Sleep 1 }
-$wishLog = Import-Csv "$tempPath\\cache_data.csv" | select  "Last Accessed", "URL" | ? URL -like "*event/gacha_info/api/getGachaLog*" | Sort-Object -Descending { $_."Last Accessed" -as [datetime] } | select -first 1
-$wishUrl = $wishLog | % {$_.URL.Substring(4)}
-# clean up 
-Remove-Item -Recurse -Force $tempPath
-if ($wishUrl) {
-    if (processWishUrl $wishUrl) {
-        return
-    }
-}
-
-Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
-pause
