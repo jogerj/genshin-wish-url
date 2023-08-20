@@ -25,8 +25,8 @@ function processWishUrl($wishUrl) {
     return $True
 }
 
-$logPathGlobal = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt");
-$logPathChina = [System.Environment]::ExpandEnvironmentVariables("%userprofile%\AppData\LocalLow\miHoYo\$([char]0x539f)$([char]0x795e)\output_log.txt");
+$logPathGlobal = [System.Environment]::ExpandEnvironmentVariables("%userprofile%/AppData/LocalLow/miHoYo/Genshin Impact/output_log.txt");
+$logPathChina = [System.Environment]::ExpandEnvironmentVariables("%userprofile%/AppData/LocalLow/miHoYo/$([char]0x539f)$([char]0x795e)/output_log.txt");
 $globalExists = Test-Path $logPathGlobal;
 $cnExists = Test-Path $logPathChina;
 
@@ -75,9 +75,9 @@ $gameDataPath = ($logMatch | Select -Last 1) -match $regexPattern
 $gameDataPath = Resolve-Path $Matches[0]
 
 
-$webcachePath = Resolve-Path "$gameDataPath\\webCaches"
+$webcachePath = Resolve-Path "$gameDataPath/webCaches"
 $cacheVerPath = Get-Item (Get-ChildItem -Path $webcachePath | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
-$cachePath = Resolve-Path "$cacheVerPath\\Cache\\Cache_Data\\data_2"
+$cachePath = Resolve-Path "$cacheVerPath/Cache/Cache_Data/data_2"
 
 if (Test-Path $cachePath) {
     $tmpFile = "$env:TEMP/ch_data_2"
