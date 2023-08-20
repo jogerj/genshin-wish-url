@@ -1,4 +1,4 @@
-# script version 0.11
+# script version 0.11.1
 # author: jogerj
 
 
@@ -75,7 +75,7 @@ $gameDataPath = ($logMatch | Select -Last 1) -match $regexPattern
 $gameDataPath = Resolve-Path $Matches[0]
 
 # Method 1
-$cachePath = "$gameDataPath\\webCaches\\2.13.0.1\\Cache\\Cache_Data\\data_2"
+$cachePath = "$gameDataPath\\webCaches\\2.15.0.0\\Cache\\Cache_Data\\data_2"
 if (Test-Path $cachePath) {
     $tmpFile = "$env:TEMP/ch_data_2"
     Copy-Item $cachePath -Destination $tmpFile
