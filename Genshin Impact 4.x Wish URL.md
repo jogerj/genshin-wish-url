@@ -68,24 +68,3 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 </details>
 
 ## [Original script](https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235)
-
-## Original Post
-<details>
-
-## Method
-I found a less intrusive way to retrieve wish URL, involves reading from cache:
-1. Download and open [Chrome Cache View](https://www.nirsoft.net/utils/chromecacheview.zip)
-2. Open your genshin folder and locate this folder: e.g.
-`C:\Program Files\Genshin Impact\Genshin Impact Game\GenshinImpact_Data\webCaches\Cache\Cache_Data`
-![](https://media.discordapp.net/attachments/820601523125747715/1012146279993843793/unknown.png)
-3. Ctrl-Q to open quick filter, look for `gacha_info`
-4. Sort by `Last Accessed`
-5. Right-click the URL cell and `Copy Clicked Cell`
-6. Remove the `1/0/` in front of the URL
-7. Post to paimon.moe as usual
-
-## Why this works
-  Genshin Impact uses [ZFBrowser](https://zenfulcrum.com/browser/docs/Readme.html), which essentially embeds a Chromium web browser into the game. Hence, there's no reason to not believe that it would behave like a normal Google Chrome/Chromium/Edge browser. The structure of the cache folder doesn't let you easily read its contents but luckily [NirSoft](https://www.nirsoft.net/utils/chrome_cache_view.html) here has done the reverse-engineering for us so all we need to do is retrieve the URL of the cache for that JSON file the game retrieved.
-  
-</details>
-
