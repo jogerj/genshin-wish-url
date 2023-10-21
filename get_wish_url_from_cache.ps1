@@ -1,4 +1,4 @@
-# script version 0.12.0
+# script version 0.12.1
 # author: jogerj
 
 
@@ -15,7 +15,7 @@ function processWishUrl($wishUrl) {
         $urlResponseMessage = Invoke-RestMethod -URI $wishUrl | % {$_.message}
     }
     if ($urlResponseMessage -ne "OK") {
-        Write-Host "Link found is expired/invalid! Open Wish History again to fetch a new link" -ForegroundColor Yellow
+        Write-Host "Link found but it is expired/invalid! Open Wish History again to fetch a new link" -ForegroundColor Yellow
         return $False
     }
     # OK
@@ -92,7 +92,7 @@ if (Test-Path $cachePath) {
             return
         }
     }
-    Write-Host "Link not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
+    Write-Host "No valid link found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
     pause
 } else {
     Write-Host "Genshin Impact cache not found! Make sure Genshin Impact is installed and open Wish History page at least once." -ForegroundColor Red
