@@ -13,10 +13,11 @@ pwsh -Command iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de
 # Report bugs/errors
 Comment on this gist or send message on [paimon.moe Discord server](https://discord.com/channels/820601523125747712/820601523125747715/1012175730873991228)
 
-Officially supported: **Powershell 5.1 and above** (Default installed on **Windows 10 and above**). Older OS will not be supported, but you may try [upgrading your powershell version](https://www.microsoft.com/en-us/download/details.aspx?id=54616)
+Officially supported: **Powershell 5.1 and above** (Default installed on **Windows 10 and above**). Older OS will not be supported, but you may try [upgrading your powershell version](https://www.microsoft.com/en-us/download/details.aspx?id=54616).
 
 # Changelog
 <details>
+ 
 ## Version 0.12.2
 * Fix for new API URL in 4.6
  
