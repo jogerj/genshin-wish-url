@@ -11,7 +11,12 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 
 # Changelog
 <details>
-
+## Version 0.12.2
+* Fix for new API URL in 4.6
+ 
+## Version 0.12.1
+* Typo message fix
+   
 ## Version 0.12.0
 * Deprecated and removed fallback methods
 * Now cache path lookup checks for latest modified subfolder

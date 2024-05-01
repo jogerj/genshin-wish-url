@@ -1,4 +1,4 @@
-# script version 0.12.1
+# script version 0.12.2
 # author: jogerj
 
 
@@ -6,9 +6,9 @@ function processWishUrl($wishUrl) {
     # check validity
     if ($wishUrl -match "https:\/\/webstatic") {
         if ($wishUrl -match "hk4e_global") {
-            $checkUrl = $wishUrl -replace "https:\/\/webstatic.+html\?", "https://hk4e-api-os.mihoyo.com/event/gacha_info/api/getGachaLog?"
+            $checkUrl = $wishUrl -replace "https:\/\/webstatic.+html\?", "https://hk4e-api-os.mihoyo.com/gacha_info/api/getGachaLog?"
         } else {
-            $checkUrl = $wishUrl -replace "https:\/\/webstatic.+html\?", "https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog?"
+            $checkUrl = $wishUrl -replace "https:\/\/webstatic.+html\?", "https://public-operation-hk4e.mihoyo.com/gacha_info/api/getGachaLog?"
         }
         $urlResponseMessage = Invoke-RestMethod -URI $checkUrl | % {$_.message}
     } else {
