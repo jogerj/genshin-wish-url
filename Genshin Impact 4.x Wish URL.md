@@ -8,6 +8,12 @@ powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e3
 ```powershell
 pwsh -Command iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/get_wish_url_from_cache.ps1')
 ```
+
+* \*NEW\* shortened URL which redirects here
+```powershell
+iex (irm 'https://genshin.jogerj.com/wishurl')
+```
+
 ### [Click here for getting wish URL from Genshin Impact on Android](https://gist.github.com/jogerj/2372d0e5bee51e001a6d8956240d527b)
 
 # Report bugs/errors
@@ -16,10 +22,11 @@ Comment on this gist or send message on [paimon.moe Discord server](https://disc
 Officially supported: **Powershell 5.1 and above** (Default installed on **Windows 10 and above**). Older OS will not be supported, but you may try [upgrading your powershell version](https://www.microsoft.com/en-us/download/details.aspx?id=54616).
 
 # Changelog
-<details>
- 
+<details> 
+
 ## Version 0.12.2
 * Fix for new API URL in 4.6
+* Added short URL
  
 ## Version 0.12.1
 * Typo message fix
