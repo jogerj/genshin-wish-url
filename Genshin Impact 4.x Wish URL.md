@@ -24,8 +24,12 @@ Officially supported: **Powershell 5.1 and above** (Default installed on **Windo
 # Changelog
 <details> 
 
+## Version 0.13.0
+* Fix for new API URL in 4.8 (Global)
+* Rework checks. Now returned URL defaults to Character Wish Banner
+
 ## Version 0.12.2
-* Fix for new API URL in 4.6
+* Fix for new API URL in 4.6 (CN)
 * Added short URL
  
 ## Version 0.12.1
