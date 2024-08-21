@@ -1,5 +1,5 @@
 # Usage
-1. Win+R and open `powershell` or `pwsh`
+1. Win+R and open `powershell` (or `pwsh` if Powershell 6+ installed)
 2. Paste and run following
 * All versions (Global/China)
 ```powershell
