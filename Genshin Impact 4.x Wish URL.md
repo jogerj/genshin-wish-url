@@ -1,16 +1,14 @@
 # Usage
-Win+R and paste following
+1. Win+R and open `powershell` or `pwsh`
+2. Paste and run following
 * All versions (Global/China)
 ```powershell
-powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/get_wish_url_from_cache.ps1')
+Set-ExecutionPolicy Bypass -Scope CurrentUser -Force;
+iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/get_wish_url_from_cache.ps1')
 ```
-* for (Powershell 6+)
+* \*NEW\* shortened URL to redirect here
 ```powershell
-pwsh -Command iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/get_wish_url_from_cache.ps1')
-```
-
-* \*NEW\* shortened URL which redirects here
-```powershell
+Set-ExecutionPolicy Bypass -Scope CurrentUser -Force;
 iex (irm 'https://genshin.jogerj.com/wishurl')
 ```
 
