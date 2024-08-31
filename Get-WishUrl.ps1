@@ -88,7 +88,7 @@ function Get-GenshinLogPath {
 
 function Invoke-RunAsAdminPrompt {
   if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    Write-Host "Do you want to try to run the script as Administrator? Press [ENTER] to continue, or any key to cancel." -ForegroundColor DarkBlue
+    Write-Host "Do you want to try to run the script as Administrator? Press [ENTER] to continue, or any key to cancel." -ForegroundColor DarkCyan
     $keyInput = [Console]::ReadKey($true).Key
     if ($keyInput -ne "13") {
       return
@@ -145,7 +145,7 @@ function Invoke-PromptClearCache {
   )
   Write-Host "Do you want to try to clear the cache folder? This will require restarting Genshin Impact if the game is running.
 (This will force the game to generate a new cache file)
-Press [ENTER] to continue, or any key to cancel." -ForegroundColor DarkBlue
+Press [ENTER] to continue, or any key to cancel." -ForegroundColor DarkCyan
   $keyInput = [Console]::ReadKey($true).Key
   if ($keyInput -eq "13") {
     # kill browser if Genshin is running
