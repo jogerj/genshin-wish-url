@@ -8,10 +8,10 @@
   3. The wish URL will be copied to the clipboard.
 .EXAMPLE
   # On Windows
-  PS C:\Users\Alice> .\get_wish_url_from_cache.ps1
+  PS C:\Users\Alice> .\Get-WishUrl.ps1
 
   # Directly from github
-
+  PS C:\Users\Alice> iex (irm 'https://github.com/jogerj/genshin-wish-url/raw/main/Get-WishUrl.ps1')
 .NOTES
   Version:  0.14.0
   Author:   jogerj
